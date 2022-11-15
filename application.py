@@ -7,8 +7,7 @@ load_dotenv(find_dotenv())
 
 application = Flask(
     __name__,
-    template_folder="../frontend/templates",
-    static_folder="../frontend/templates/assets",
+    static_folder="templates/assets",
 )
 
 application.config["SQLALCHEMY_DATABASE_URI"] = getenv("DB_URL")
