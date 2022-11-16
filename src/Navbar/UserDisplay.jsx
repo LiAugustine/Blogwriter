@@ -4,7 +4,7 @@ import axios from 'axios'
 import { Avatar, Button, Row, Dropdown, User, Popover, Container, Text } from "@nextui-org/react";
 
 
-export default function LoginButton(msg) {
+export default function LoginButton() {
     const [user, setUser] = useState()
 
     useEffect(() => {
@@ -44,7 +44,7 @@ export default function LoginButton(msg) {
         <div>
             {user ? (
                 <div>
-                    <Popover>
+                    <Popover placement="bottom">
                         <Popover.Trigger>
                             <User
                                 bordered
@@ -69,9 +69,9 @@ export default function LoginButton(msg) {
                 </div>
             ) :
                 (
-                    <Popover>
+                    <Popover placement="bottom">
                         <Popover.Trigger>
-                            <Button size="lg" auto color="success">{msg.msg}</Button>
+                            <Button size="lg" auto color="success">Sign-in</Button>
                         </Popover.Trigger>
                         <Popover.Content>
                             <Container>
