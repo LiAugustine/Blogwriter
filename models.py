@@ -1,5 +1,5 @@
 from flask_sqlalchemy import SQLAlchemy
-from sqlalchemy import ForeignKey
+from sqlalchemy import func, DateTime, ForeignKey
 
 db = SQLAlchemy()
 
@@ -20,9 +20,9 @@ class Articles(db.Model):
     author_id = db.Column(db.Text, ForeignKey("Blogs.author_id"))
     title = db.Column(db.String(100), unique=False, nullable=False)
     subtitle = db.Column(db.String(500), unique=False, nullable=False)
-    topic = db.Column(db.String(50), unique=False, nullable=False)
     image = db.Column(db.Text, unique=False, nullable=True)
-    date = db.Column(db.String(100), unique=False, nullable=False)
+    created_at = db.Column(DateTime(timezone=True), default=func.now())
+    updated_at = db.Column(DateTime(timezone=True), onupdate=func.now())
     text = db.Column(db.Text, unique=False, nullable=False)
     article_likes = db.relationship(
         "ArticleLikes", backref=db.backref("Blogs", order_by="ArticleLikes.liker_id")
