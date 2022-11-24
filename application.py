@@ -22,6 +22,7 @@ application.secret_key = getenv("SECRET_KEY")
 
 db.init_app(application)
 with application.app_context():
+    # db.drop_all()
     db.create_all()
 
 application.register_blueprint(api)

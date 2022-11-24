@@ -4,17 +4,7 @@ import { Container, Row, Text } from "@nextui-org/react";
 import AddPost from "./AddPost"
 import Posts from "./Posts"
 
-export default function ManageBlog() {
-    const [user, setUser] = useState()
-
-    useEffect(() => {
-        const loggedInUser = localStorage.getItem("user")
-        if (loggedInUser) {
-            const foundUser = JSON.parse(loggedInUser)
-            setUser(foundUser)
-        }
-
-    }, []);
+export default function ManageBlog(user) {
 
     const [blog, setBlog] = useState([])
 
@@ -25,9 +15,11 @@ export default function ManageBlog() {
             })
                 .then((response) => {
                     setBlog(response.data)
-                })
+                }
+                )
         }
     }, [user]);
+
 
     return (
         <Container>
@@ -37,7 +29,7 @@ export default function ManageBlog() {
                 </Text>
             </Row>
 
-            <AddPost />
+            <AddPost user={user} />
 
             <br></br>
             <Posts />

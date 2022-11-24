@@ -8,6 +8,7 @@ class Blogs(db.Model):
     __tablename__ = "Blogs"
     id = db.Column(db.Integer, primary_key=True)
     author_id = db.Column(db.Text, unique=True, nullable=False)
+    author_name = db.Column(db.Text, unique=False, nullable=False)
     blog_name = db.Column(db.String(100), unique=False, nullable=False)
     articles = db.relationship(
         "Articles", backref=db.backref("Blogs", order_by="Articles.author_id")
@@ -22,7 +23,7 @@ class Articles(db.Model):
     subtitle = db.Column(db.String(500), unique=False, nullable=False)
     image = db.Column(db.Text, unique=False, nullable=True)
     created_at = db.Column(DateTime(timezone=True), default=func.now())
-    updated_at = db.Column(DateTime(timezone=True), onupdate=func.now())
+    # updated_at = db.Column(DateTime(timezone=True), onupdate=func.now())
     text = db.Column(db.Text, unique=False, nullable=False)
     article_likes = db.relationship(
         "ArticleLikes", backref=db.backref("Blogs", order_by="ArticleLikes.liker_id")
