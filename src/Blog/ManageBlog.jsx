@@ -6,7 +6,7 @@ import Posts from "./Posts"
 
 export default function ManageBlog(user) {
 
-    const [blog, setBlog] = useState([])
+    const [blogName, setBlogName] = useState([])
 
     useEffect(() => {
         if (typeof (user) !== "undefined") {
@@ -14,25 +14,26 @@ export default function ManageBlog(user) {
                 user
             })
                 .then((response) => {
-                    setBlog(response.data)
+                    setBlogName(response.data)
                 }
                 )
         }
     }, [user]);
 
 
+
     return (
         <Container>
             <Row justify="center" align="center">
                 <Text b h3>
-                    Manage Your Blog: {blog}
+                    Manage Your Blog: {blogName}
                 </Text>
             </Row>
 
             <AddPost user={user} />
 
             <br></br>
-            <Posts />
+            <Posts user={user} />
         </Container >
     )
 }

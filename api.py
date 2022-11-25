@@ -55,19 +55,24 @@ def add_post():
     db.session.commit()
 
     return jsonify("Added post " + title)
-    # updated_posts = Articles.query.filter_by(author_id=author_id).all()
 
-    # return jsonify(
-    #     [
-    #         {
-    #             "author_id": post.author_id,
-    #             "title": post.title,
-    #             "subtitle": post.subtitle,
-    #             "image": post.image,
-    #             "created_at": post.created_at,
-    #             "author": post.author,
-    #             "publishedAt": post.published_at,
-    #         }
-    #         for post in updated_posts
-    #     ]
-    # )
+
+@api.route("/api/get_posts", methods=["POST"])
+def get_posts():
+    author_id = request.json["user"]
+    print(author_id)
+    blog_posts = Articles.query.filter_by(author_id=author_id).all()
+    print(blog_posts)
+    return jsonify(
+        [
+            {
+                "author_id": post.author_id,
+                "title": post.title,
+                "subtitle": post.subtitle,
+                "image": post.image,
+                "created_at": post.created_at,
+                "text": post.text,
+            }
+            for post in blog_posts
+        ]
+    )
