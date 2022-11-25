@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import axios from 'axios'
-import { Grid, Button, Card, Row, Text } from "@nextui-org/react";
+import { Modal, Grid, Button, Card, Row, Text } from "@nextui-org/react";
+import EditPost from "./EditPost"
 
 export default function Posts(props) {
 
@@ -25,44 +26,51 @@ export default function Posts(props) {
     }, [user]);
     console.log(posts)
 
-
     return (
         <div>
             {posts.map((post) =>
-                <Card css={{ mw: "400px" }}>
-                    <Card.Header>
-                        <img
+                <Grid.Container gap={2} justify="center">
+                    <Card css={{ mw: "400px" }}>
+                        <Card.Header>
+                            <img
 
-                            src={post.image}
-                            alt="image"
-                            width="70px"
-                            height="70px"
-                        />
-                        <Grid.Container css={{ pl: "$6" }}>
-                            <Grid xs={12}>
-                                <Text h4 css={{ lineHeight: "$xs" }}>
-                                    {post.title}
-                                </Text>
-                            </Grid>
+                                src={post.image}
+                                alt="image"
+                                width="70px"
+                                height="70px"
+                            />
+                            <Grid.Container css={{ pl: "$6" }}>
+                                <Grid xs={12}>
+                                    <Text h4 css={{ lineHeight: "$xs" }}>
+                                        {post.title}
+                                    </Text>
+                                </Grid>
 
-                        </Grid.Container>
+                            </Grid.Container>
 
 
-                    </Card.Header>
-                    <Card.Divider />
-                    <Card.Body>
-                        <Text b>
-                            {post.subtitle}
-                        </Text>
-                    </Card.Body>
-                    <Card.Divider />
-                    <Card.Footer>
-                        <Row>
+                        </Card.Header>
+                        <Card.Divider />
+                        <Card.Body>
+                            <Text b>
+                                {post.subtitle}
+                            </Text>
+                        </Card.Body>
+                        <Card.Divider />
+                        <Card.Footer>
+                            <Row>
+                                <EditPost
+                                    id={post.id}
+                                    title={post.title}
+                                    subtitle={post.subtitle}
+                                    image={post.image}
+                                    text={post.text} />
 
-                            <Button size="sm" color="error">Edit article!</Button>
-                        </Row>
-                    </Card.Footer>
-                </Card>
+                                <Button size="sm" color="error">Delete post</Button>
+                            </Row>
+                        </Card.Footer>
+                    </Card>
+                </Grid.Container>
             )
             }
         </div>

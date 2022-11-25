@@ -18,7 +18,6 @@ def home():
 
 @api.route("/api/get_user_blog", methods=["POST"])
 def blog():
-    print(request.json)
     data = request.json["user"]["user"]
     user_id = data.get("sub")
     user_name = data.get("name")
@@ -32,11 +31,29 @@ def blog():
     return jsonify(user_name)
 
 
+@api.route("/api/get_posts", methods=["POST"])
+def get_posts():
+    author_id = request.json["user"]
+    blog_posts = Articles.query.filter_by(author_id=author_id).all()
+    return jsonify(
+        [
+            {
+                "id": post.id,
+                "author_id": post.author_id,
+                "title": post.title,
+                "subtitle": post.subtitle,
+                "image": post.image,
+                "created_at": post.created_at,
+                "text": post.text,
+            }
+            for post in blog_posts
+        ]
+    )
+
+
 @api.route("/api/add_post", methods=["POST"])
 def add_post():
     data = request.json["post"]
-    print("This is the data: ")
-    print(data)
     author_id = data.get("author_id")
     title = data.get("title")
     subtitle = data.get("subtitle")
@@ -57,22 +74,15 @@ def add_post():
     return jsonify("Added post " + title)
 
 
-@api.route("/api/get_posts", methods=["POST"])
-def get_posts():
-    author_id = request.json["user"]
-    print(author_id)
-    blog_posts = Articles.query.filter_by(author_id=author_id).all()
-    print(blog_posts)
-    return jsonify(
-        [
-            {
-                "author_id": post.author_id,
-                "title": post.title,
-                "subtitle": post.subtitle,
-                "image": post.image,
-                "created_at": post.created_at,
-                "text": post.text,
-            }
-            for post in blog_posts
-        ]
-    )
+@api.route("/api/save_post_changes", methods=["POST"])
+def save_post_changes():
+    print(request.json)
+    data = request.json["post"]
+    post_id = data.get("id")
+    post = Articles.query.filter_by(id=post_id).one()
+    post.title = data.get("title")
+    post.subtitle = data.get("subtitle")
+    post.image = data.get("image")
+    post.text = data.get("text")
+    db.session.commit()
+    return jsonify("Post edited successfully!")
