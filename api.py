@@ -86,3 +86,11 @@ def save_post_changes():
     post.text = data.get("text")
     db.session.commit()
     return jsonify("Post edited successfully!")
+
+
+@api.route("/api/delete_post", methods=["POST"])
+def delete_post():
+    id = request.json["post_id"]
+    Articles.query.filter_by(id=id).delete()
+    db.session.commit()
+    return jsonify("Post deleted successfully!")

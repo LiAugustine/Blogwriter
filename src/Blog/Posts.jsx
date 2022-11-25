@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import axios from 'axios'
 import { Modal, Grid, Button, Card, Row, Text } from "@nextui-org/react";
 import EditPost from "./EditPost"
+import DeletePost from "./DeletePost"
 
 export default function Posts(props) {
 
@@ -66,7 +67,10 @@ export default function Posts(props) {
                                     image={post.image}
                                     text={post.text} />
 
-                                <Button size="sm" color="error">Delete post</Button>
+                                <DeletePost
+                                    id={post.id}
+                                    title={post.title}
+                                />
                             </Row>
                         </Card.Footer>
                     </Card>
