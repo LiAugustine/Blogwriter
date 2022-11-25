@@ -47,6 +47,7 @@ export default function EditPost(props) {
             </Button>
             <Modal
                 closeButton
+                width="1000px"
                 aria-labelledby="modal-title"
                 open={visible}
                 onClose={closeHandler}
@@ -92,35 +93,38 @@ export default function EditPost(props) {
                     />
                 </Modal.Body>
                 <Modal.Footer>
+                    <Row align="center" justify="center">
+                        <>
+                            <Editor
+                                name='text'
+                                onChange={saveArticleText}
+                                apiKey={import.meta.env.VITE_TINY_MCE_EDITOR}
+                                onInit={(evt, editor) => editorRef.current = editor}
+                                initialValue={props.text}
+                                init={{
+                                    height: 500,
+                                    menubar: false,
+                                    plugins: [
+                                        'advlist autolink lists link image charmap print preview anchor',
+                                        'searchreplace visualblocks code fullscreen',
+                                        'insertdatetime media table paste code help wordcount'
+                                    ],
+                                    toolbar: 'undo redo | formatselect | ' +
+                                        'bold italic backcolor | alignleft aligncenter ' +
+                                        'alignright alignjustify | bullist numlist outdent indent | ' +
+                                        'removeformat | help',
+                                    content_style: 'body { font-family:Helvetica,Arial,sans-serif; font-size:14px }'
+                                }}
+                            />
+                        </>
+                    </Row>
                     <Button auto color="success" onClick={onClickSave}>
                         Save Changes!
                     </Button>
+                    {" "}
                     <Button auto flat color="error" onClick={closeHandler}>
                         Cancel
                     </Button>
-                    <>
-                        <Editor
-                            name='text'
-                            onChange={saveArticleText}
-                            apiKey={import.meta.env.VITE_TINY_MCE_EDITOR}
-                            onInit={(evt, editor) => editorRef.current = editor}
-                            initialValue={props.text}
-                            init={{
-                                height: 500,
-                                menubar: false,
-                                plugins: [
-                                    'advlist autolink lists link image charmap print preview anchor',
-                                    'searchreplace visualblocks code fullscreen',
-                                    'insertdatetime media table paste code help wordcount'
-                                ],
-                                toolbar: 'undo redo | formatselect | ' +
-                                    'bold italic backcolor | alignleft aligncenter ' +
-                                    'alignright alignjustify | bullist numlist outdent indent | ' +
-                                    'removeformat | help',
-                                content_style: 'body { font-family:Helvetica,Arial,sans-serif; font-size:14px }'
-                            }}
-                        />
-                    </>
                 </Modal.Footer>
             </Modal>
         </div>

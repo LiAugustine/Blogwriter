@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import axios from 'axios'
-import { Modal, Grid, Button, Card, Row, Text } from "@nextui-org/react";
+import { Grid, Card, Row, Text } from "@nextui-org/react";
 import EditPost from "./EditPost"
 import DeletePost from "./DeletePost"
 
@@ -36,7 +36,7 @@ export default function Posts(props) {
                             <img
 
                                 src={post.image}
-                                alt="image"
+                                alt="Post Image"
                                 width="70px"
                                 height="70px"
                             />
