@@ -59,19 +59,23 @@ export default function Posts(props) {
                         </Card.Body>
                         <Card.Divider />
                         <Card.Footer>
-                            <Row>
-                                <EditPost
-                                    id={post.id}
-                                    title={post.title}
-                                    subtitle={post.subtitle}
-                                    image={post.image}
-                                    text={post.text} />
+                            <Grid.Container gap={2} align="center" justify="center">
+                                <Grid>
+                                    <EditPost
+                                        id={post.id}
+                                        title={post.title}
+                                        subtitle={post.subtitle}
+                                        image={post.image}
+                                        text={post.text} />
+                                </Grid>
 
-                                <DeletePost
-                                    id={post.id}
-                                    title={post.title}
-                                />
-                            </Row>
+                                <Grid>
+                                    <DeletePost
+                                        id={post.id}
+                                        title={post.title}
+                                    />
+                                </Grid>
+                            </Grid.Container>
                         </Card.Footer>
                     </Card>
                 </Grid.Container>

@@ -1,8 +1,9 @@
 import { useState, useEffect, useRef } from "react";
-import { Modal, Button, Text, Input, Row, Checkbox } from "@nextui-org/react";
+import { Modal, Button, Text, Input, Row, Collapse } from "@nextui-org/react";
 import { Editor } from '@tinymce/tinymce-react';
 import axios from 'axios'
 import.meta.env.VITE_TINY_MCE_EDITOR
+import './TinyMCE.css'
 
 export default function EditPost(props) {
     const [post, setPost] = useState({
@@ -43,19 +44,19 @@ export default function EditPost(props) {
     return (
         <div>
             <Button auto color="warning" onClick={handler}>
-                Edit article
+                Edit Article
             </Button>
             <Modal
                 closeButton
-                width="1000px"
+                width="1200px"
                 aria-labelledby="modal-title"
                 open={visible}
                 onClose={closeHandler}
             >
                 <Modal.Header>
-                    <Text id="modal-title" size={18}>
+                    <Text id="modal-title" size={25}>
                         Edit {" "}
-                        <Text b size={18}>
+                        <Text b size={25}>
                             {props.title}
                         </Text>
                     </Text>
@@ -91,33 +92,22 @@ export default function EditPost(props) {
                         initialValue={props.image}
                         onChange={saveChange}
                     />
-                </Modal.Body>
-                <Modal.Footer>
-                    <Row align="center" justify="center">
-                        <>
+                    <Collapse.Group className="textEditor">
+                        <Collapse title="Edit Text" expanded>
                             <Editor
                                 name='text'
                                 onChange={saveArticleText}
                                 apiKey={import.meta.env.VITE_TINY_MCE_EDITOR}
                                 onInit={(evt, editor) => editorRef.current = editor}
                                 initialValue={props.text}
-                                init={{
-                                    height: 500,
-                                    menubar: false,
-                                    plugins: [
-                                        'advlist autolink lists link image charmap print preview anchor',
-                                        'searchreplace visualblocks code fullscreen',
-                                        'insertdatetime media table paste code help wordcount'
-                                    ],
-                                    toolbar: 'undo redo | formatselect | ' +
-                                        'bold italic backcolor | alignleft aligncenter ' +
-                                        'alignright alignjustify | bullist numlist outdent indent | ' +
-                                        'removeformat | help',
-                                    content_style: 'body { font-family:Helvetica,Arial,sans-serif; font-size:14px }'
-                                }}
                             />
-                        </>
-                    </Row>
+                        </Collapse>
+                    </Collapse.Group>
+
+
+                </Modal.Body>
+
+                <Modal.Footer>
                     <Button auto color="success" onClick={onClickSave}>
                         Save Changes!
                     </Button>
@@ -127,6 +117,7 @@ export default function EditPost(props) {
                     </Button>
                 </Modal.Footer>
             </Modal>
+
         </div>
     );
 }

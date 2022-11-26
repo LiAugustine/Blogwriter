@@ -21,7 +21,7 @@ export default function DeletePost(props) {
                 Delete Post
             </Button>
             <Modal
-                scroll
+                closeButton
                 width="600px"
                 aria-labelledby="modal-title"
                 aria-describedby="modal-description"

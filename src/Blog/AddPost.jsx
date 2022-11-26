@@ -66,29 +66,14 @@ export default function AddPost(props) {
                     </Grid.Container>
 
 
-                    <>
-                        <Editor
-                            name='text'
-                            onChange={saveArticleText}
-                            apiKey={import.meta.env.VITE_TINY_MCE_EDITOR}
-                            onInit={(evt, editor) => editorRef.current = editor}
-                            initialValue="<p>Type your article here!</p>"
-                            init={{
-                                height: 500,
-                                menubar: false,
-                                plugins: [
-                                    'advlist autolink lists link image charmap print preview anchor',
-                                    'searchreplace visualblocks code fullscreen',
-                                    'insertdatetime media table paste code help wordcount'
-                                ],
-                                toolbar: 'undo redo | formatselect | ' +
-                                    'bold italic backcolor | alignleft aligncenter ' +
-                                    'alignright alignjustify | bullist numlist outdent indent | ' +
-                                    'removeformat | help',
-                                content_style: 'body { font-family:Helvetica,Arial,sans-serif; font-size:14px }'
-                            }}
-                        />
-                    </>
+                    <Editor
+                        name='text'
+                        onChange={saveArticleText}
+                        apiKey={import.meta.env.VITE_TINY_MCE_EDITOR}
+                        onInit={(evt, editor) => editorRef.current = editor}
+                        initialValue="<p>Type your article here!</p>"
+                    />
+
                     <Row align='center' justify='center'>
                         <Button color='success' size='lg' onClick={onClickAdd}>Add post!</Button>
                     </Row>
