@@ -6,7 +6,7 @@ Created by Augustine Li.
 <br/>
 **Deployed on http://blogwriter.eba-yvhmywcj.us-east-1.elasticbeanstalk.com/**
 
-##Technologies Used
+## Technologies Used
 * Flask
 * PostgreSQL
 * React
