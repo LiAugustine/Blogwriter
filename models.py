@@ -43,4 +43,4 @@ class FollowedBlogs(db.Model):
     __tablename__ = "FollowedBlogs"
     id = db.Column(db.Integer, primary_key=True)
     user_id = db.Column(db.Text, unique=True, nullable=False)
-    blog = db.Column(db.Integer, ForeignKey("Blogs.id"))
+    blog_id = db.Column(db.Integer, ForeignKey("Blogs.id"))

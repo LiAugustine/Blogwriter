@@ -1,10 +1,19 @@
 import { useState, useEffect } from "react";
 import axios from 'axios'
-import { Link } from "react-router-dom"
-import { Card, Button, Grid, Text } from "@nextui-org/react";
+import { createMemoryRouter, Link } from "react-router-dom"
+import { Card, Button, Grid, Text, Row } from "@nextui-org/react";
 import './Blog.css'
 
 export default function BlogSearch() {
+    const [user, setUser] = useState()
+
+    useEffect(() => {
+        const loggedInUser = localStorage.getItem("user")
+        if (loggedInUser) {
+            const foundUser = JSON.parse(loggedInUser)
+            setUser(foundUser)
+        }
+    }, []);
 
     const [blogs, setBlogs] = useState([])
 
@@ -15,14 +24,25 @@ export default function BlogSearch() {
             });
     }, []);
 
+    console.log(user)
+
+    const onClickFollow = (user_id, blog_id) => {
+        axios.post('/api/follow_blog', {
+            user_id, blog_id
+        })
+            .then(response => {
+                alert(response.data)
+            })
+    }
+
     return (
         <div>
-
-            <Button.Group className="centered" color="primary">
-                <Button className="centered">Blogs</Button>
-                <Button className="centered" flat as={Link} to="/PostSearch">Blog Posts</Button>
-            </Button.Group>
-
+            <Row align="center" justify="center">
+                <Button.Group className="centered" color="primary">
+                    <Button className="centered">Blogs</Button>
+                    <Button className="centered" flat as={Link} to="/PostSearch">Blog Posts</Button>
+                </Button.Group>
+            </Row>
 
 
             {blogs.map((blog) =>
@@ -54,7 +74,11 @@ export default function BlogSearch() {
                         <Card.Divider />
 
                         <Card.Footer>
-                            <Button className="centered" color="warning">
+                            <Button
+                                className="centered"
+                                color="warning"
+                                onClick={() => onClickFollow(user.sub, blog.id)}
+                            >
                                 +Follow Blogger
                             </Button>
                         </Card.Footer>

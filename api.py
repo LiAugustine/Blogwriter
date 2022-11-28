@@ -139,6 +139,7 @@ def get_all_blogs():
     return jsonify(
         [
             {
+                "id": blog.id,
                 "author_name": blog.author_name,
                 "blog_name": blog.blog_name,
                 "image": blog.image,
@@ -147,3 +148,17 @@ def get_all_blogs():
             for blog in all_blogs
         ]
     )
+
+
+@api.route("/api/follow_blog", methods=["POST"])
+def follow_blog():
+    data = request.json
+    user_id = data["user_id"]
+    blog_id = data["blog_id"]
+    followed = FollowedBlogs.query.filter_by(user_id=user_id, blog_id=blog_id).all()
+    if len(followed) == 0:
+        new_follow = FollowedBlogs(user_id=user_id, blog_id=blog_id)
+        db.session.add(new_follow)
+        db.session.commit()
+        return jsonify("Followed blog successfully")
+    return jsonify("Already followed blog!")
