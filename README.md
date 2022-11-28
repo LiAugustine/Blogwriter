@@ -10,9 +10,6 @@ Created by Augustine Li.
 * Flask
 * PostgreSQL
 * React
-    *Axios
-    *TinyMCE Text Editor
-    *NextUI React UI Library
 * Docker
 * AWS Elastic Beanstalk
 * AWS RDS, which hosts the PostgreSQL database
