@@ -1,7 +1,8 @@
 import { useState, useEffect } from "react";
 import axios from 'axios'
 import { Link } from "react-router-dom"
-import { Card, Button, Row, Collapse, Grid, Text } from "@nextui-org/react";
+import { Card, Button, Grid, Text } from "@nextui-org/react";
+import './Blog.css'
 
 export default function BlogSearch() {
 
@@ -16,12 +17,12 @@ export default function BlogSearch() {
 
     return (
         <div>
-            <Row align="center" justify="center">
-                <Button.Group color="primary">
-                    <Button>Blogs</Button>
-                    <Button flat as={Link} to="/PostSearch">Blog Posts</Button>
-                </Button.Group>
-            </Row>
+
+            <Button.Group className="centered" color="primary">
+                <Button className="centered">Blogs</Button>
+                <Button className="centered" flat as={Link} to="/PostSearch">Blog Posts</Button>
+            </Button.Group>
+
 
 
             {blogs.map((blog) =>
@@ -44,12 +45,18 @@ export default function BlogSearch() {
                             </Grid.Container>
                         </Card.Header>
 
+                        <Card.Body>
+                            <Text className="centered">
+                                {blog.description}
+                            </Text>
+                        </Card.Body>
+
                         <Card.Divider />
 
                         <Card.Footer>
-                            <Text>
-                                {blog.description}
-                            </Text>
+                            <Button className="centered" color="warning">
+                                +Follow Blogger
+                            </Button>
                         </Card.Footer>
 
                     </Card>

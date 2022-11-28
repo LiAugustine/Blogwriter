@@ -1,0 +1,11 @@
+.centered {
+    /*Centers an item.*/
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.tox.tox-tinymce-aux {
+    /*Fixes an issue where TinyMCE text editor menu is not displayed properly*/
+    z-index: 100000;
+}

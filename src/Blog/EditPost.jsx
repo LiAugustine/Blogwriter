@@ -3,7 +3,7 @@ import { Modal, Button, Text, Input, Row, Collapse } from "@nextui-org/react";
 import { Editor } from '@tinymce/tinymce-react';
 import axios from 'axios'
 import.meta.env.VITE_TINY_MCE_EDITOR
-import './TinyMCE.css'
+import './Blog.css'
 
 export default function EditPost(props) {
     const [post, setPost] = useState({

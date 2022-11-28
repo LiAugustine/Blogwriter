@@ -1,15 +1,13 @@
 import { Link } from "react-router-dom"
-import { Button, Row, Collapse, Grid, Text } from "@nextui-org/react";
-
+import { Button, Collapse, Grid, Text } from "@nextui-org/react";
+import './Blog.css'
 
 export default function PostSearch() {
     return (
-        <Row align="center" justify="center">
-            <Button.Group color="primary">
-                <Button flat as={Link} to="/BlogSearch">Blogs</Button>
-                <Button>Blog Posts</Button>
-            </Button.Group>
-        </Row>
+        <Button.Group className="centered" color="primary">
+            <Button className="centered" flat as={Link} to="/BlogSearch">Blogs</Button>
+            <Button className="centered">Blog Posts</Button>
+        </Button.Group>
     );
 
 }

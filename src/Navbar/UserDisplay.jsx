@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { useGoogleLogin } from '@react-oauth/google';
 import axios from 'axios'
-import { Avatar, Button, Row, Dropdown, User, Popover, Container, Text } from "@nextui-org/react";
+import { Button, User, Popover, Container, Text } from "@nextui-org/react";
 
 
 export default function LoginButton() {
