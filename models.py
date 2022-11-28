@@ -10,6 +10,7 @@ class Blogs(db.Model):
     author_id = db.Column(db.Text, unique=True, nullable=False)
     author_name = db.Column(db.Text, unique=False, nullable=False)
     blog_name = db.Column(db.String(100), unique=False, nullable=False)
+    description = db.Column(db.String(2000), unique=False, nullable=True)
     image = db.Column(db.Text, unique=False, nullable=True)
     articles = db.relationship(
         "Articles", backref=db.backref("Blogs", order_by="Articles.author_id")

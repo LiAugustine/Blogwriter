@@ -62,7 +62,7 @@ export default function ManageBlog(user) {
                 >
                     <Modal.Header>
                         <Text id="modal-title" size={25}>
-                            Manage
+                            Manage {" "}
                             <Text b size={25}>
                                 {blog.blog_name}
                             </Text>
@@ -87,6 +87,16 @@ export default function ManageBlog(user) {
                             size="lg"
                             label="Image"
                             initialValue={blog.image}
+                            onChange={saveChange}
+                        />
+                        <Input
+                            name="description"
+                            bordered
+                            fullWidth
+                            color="primary"
+                            size="lg"
+                            label="Description"
+                            initialValue={blog.description}
                             onChange={saveChange}
                         />
                     </Modal.Body>

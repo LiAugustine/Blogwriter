@@ -32,6 +32,7 @@ def blog():
                 "author_name": user_blog.author_name,
                 "blog_name": user_blog.blog_name,
                 "image": user_blog.image,
+                "description": user_blog.description,
             }
         )
 
@@ -46,11 +47,13 @@ def save_blog_changes():
     data = request.json["blog"]
     blog_id = data.get("id")
     blog_name = data.get("blog_name")
+    blog_description = data.get("description")
     image = data.get("image")
 
     blog = Blogs.query.filter_by(id=blog_id).one()
     blog.blog_name = blog_name
     blog.image = image
+    blog.description = blog_description
     db.session.commit()
 
     updated_blog = Blogs.query.filter_by(id=blog_id).one()
@@ -136,9 +139,11 @@ def get_all_blogs():
     return jsonify(
         [
             {
-                "author_name": Blog.author_name,
-                "blog_name": Blog.blog_name,
+                "author_name": blog.author_name,
+                "blog_name": blog.blog_name,
+                "image": blog.image,
+                "description": blog.description,
             }
-            for Blog in all_blogs
+            for blog in all_blogs
         ]
     )
