@@ -12,6 +12,9 @@ api = Blueprint("api", __name__)
 
 
 @api.route("/")
+@api.route("/BlogFeed")
+@api.route("/BlogSearch")
+@api.route("/PostSearch")
 def home():
     return render_template("index.html")
 
@@ -23,12 +26,43 @@ def blog():
     user_name = data.get("name")
     user_blog = Blogs.query.filter_by(author_id=user_id).first()
     if user_blog:
-        return jsonify(user_blog.blog_name)
+        return jsonify(
+            {
+                "id": user_blog.id,
+                "author_name": user_blog.author_name,
+                "blog_name": user_blog.blog_name,
+                "image": user_blog.image,
+            }
+        )
 
     new_blog = Blogs(author_id=user_id, author_name=user_name, blog_name=user_name)
     db.session.add(new_blog)
     db.session.commit()
     return jsonify(user_name)
+
+
+@api.route("/api/save_blog_changes", methods=["POST"])
+def save_blog_changes():
+    data = request.json["blog"]
+    blog_id = data.get("id")
+    blog_name = data.get("blog_name")
+    image = data.get("image")
+
+    blog = Blogs.query.filter_by(id=blog_id).one()
+    blog.blog_name = blog_name
+    blog.image = image
+    db.session.commit()
+
+    updated_blog = Blogs.query.filter_by(id=blog_id).one()
+
+    return jsonify(
+        {
+            "id": updated_blog.id,
+            "author_name": updated_blog.author_name,
+            "blog_name": updated_blog.blog_name,
+            "image": updated_blog.image,
+        }
+    )
 
 
 @api.route("/api/get_posts", methods=["POST"])
