@@ -94,3 +94,17 @@ def delete_post():
     Articles.query.filter_by(id=id).delete()
     db.session.commit()
     return jsonify("Post deleted successfully!")
+
+
+@api.route("/api/get_all_blogs", methods=["GET"])
+def get_all_blogs():
+    all_blogs = Blogs.query.all()
+    return jsonify(
+        [
+            {
+                "author_name": Blog.author_name,
+                "blog_name": Blog.blog_name,
+            }
+            for Blog in all_blogs
+        ]
+    )

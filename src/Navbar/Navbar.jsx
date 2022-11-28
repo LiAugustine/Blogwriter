@@ -1,5 +1,6 @@
-import { Container, Card, Row, Popover, Input, Navbar, Button, Text, useTheme } from "@nextui-org/react";
+import { Navbar, Button, Text } from "@nextui-org/react";
 import { Link } from "react-router-dom"
+import { FaHome, FaNewspaper, FaSearch } from "react-icons/fa";
 import UserDisplay from "./UserDisplay"
 
 export default function App() {
@@ -12,16 +13,23 @@ export default function App() {
         </Text>
       </Navbar.Brand>
 
-      <Navbar.Content enableCursorHighlight hideIn="xs" variant="underline">
+      <Navbar.Content hideIn="xs" variant="underline">
 
         <Navbar.Link as={Link} to="/">
-          Home</Navbar.Link>
+          <FaHome />
+          Home
+        </Navbar.Link>
 
-        <Navbar.Link as={Link} to="/">
+        <Navbar.Link as={Link} to="/BlogFeed">
+          <FaNewspaper />
           BlogFeed</Navbar.Link>
-        <Navbar.Item>
-          <Input clearable bordered placeholder="Search for a blog!" />
-        </Navbar.Item>
+
+        <Navbar.Link as={Link} to="/BlogSearch">
+          <FaSearch />
+          BlogSearch
+        </Navbar.Link>
+
+
       </Navbar.Content>
       <Navbar.Content>
         <Navbar.Item>
@@ -30,6 +38,6 @@ export default function App() {
 
         </Navbar.Item>
       </Navbar.Content>
-    </Navbar>
+    </Navbar >
   )
 }
