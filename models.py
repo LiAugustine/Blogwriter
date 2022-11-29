@@ -9,7 +9,7 @@ class Blogs(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     author_id = db.Column(db.Text, unique=True, nullable=False)
     author_name = db.Column(db.Text, unique=False, nullable=False)
-    blog_name = db.Column(db.String(100), unique=False, nullable=False)
+    blog_name = db.Column(db.String(100), unique=True, nullable=False)
     description = db.Column(db.String(2000), unique=False, nullable=True)
     image = db.Column(db.Text, unique=False, nullable=True)
     articles = db.relationship(
@@ -43,4 +43,4 @@ class FollowedBlogs(db.Model):
     __tablename__ = "FollowedBlogs"
     id = db.Column(db.Integer, primary_key=True)
     user_id = db.Column(db.Text, unique=True, nullable=False)
-    blog_id = db.Column(db.Integer, ForeignKey("Blogs.id"))
+    blog_author_id = db.Column(db.Text, ForeignKey("Blogs.author_id"))

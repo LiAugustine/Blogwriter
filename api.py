@@ -54,6 +54,7 @@ def save_blog_changes():
     blog.blog_name = blog_name
     blog.image = image
     blog.description = blog_description
+
     db.session.commit()
 
     updated_blog = Blogs.query.filter_by(id=blog_id).one()
@@ -113,7 +114,6 @@ def add_post():
 
 @api.route("/api/save_post_changes", methods=["POST"])
 def save_post_changes():
-    print(request.json)
     data = request.json["post"]
     post_id = data.get("id")
     post = Articles.query.filter_by(id=post_id).one()
@@ -140,6 +140,7 @@ def get_all_blogs():
         [
             {
                 "id": blog.id,
+                "author_id": blog.author_id,
                 "author_name": blog.author_name,
                 "blog_name": blog.blog_name,
                 "image": blog.image,
@@ -154,11 +155,42 @@ def get_all_blogs():
 def follow_blog():
     data = request.json
     user_id = data["user_id"]
-    blog_id = data["blog_id"]
-    followed = FollowedBlogs.query.filter_by(user_id=user_id, blog_id=blog_id).all()
+    blog_author_id = data["blog_author_id"]
+    followed = FollowedBlogs.query.filter_by(
+        user_id=user_id, blog_author_id=blog_author_id
+    ).all()
     if len(followed) == 0:
-        new_follow = FollowedBlogs(user_id=user_id, blog_id=blog_id)
+        new_follow = FollowedBlogs(user_id=user_id, blog_author_id=blog_author_id)
         db.session.add(new_follow)
         db.session.commit()
         return jsonify("Followed blog successfully")
     return jsonify("Already followed blog!")
+
+
+@api.route("/api/get_blog_feed", methods=["POST"])
+def get_blog_feed():
+    data = request.json
+    user_id = data["user"]
+
+    following = FollowedBlogs.query.filter_by(user_id=user_id).all()
+    followed_blogs = []
+    for blog in following:
+        followed_blogs.append(blog.blog_author_id)
+
+    blog_feed = []
+
+    for author_id in followed_blogs:
+        followed_articles = Articles.query.filter_by(author_id=author_id).all()
+        for article in followed_articles:
+            blog_feed.append(
+                {
+                    "id": article.id,
+                    "author_id": article.author_id,
+                    "title": article.title,
+                    "subtitle": article.subtitle,
+                    "image": article.image,
+                    "created_at": article.created_at,
+                    "text": article.text,
+                }
+            )
+    return jsonify(blog_feed)

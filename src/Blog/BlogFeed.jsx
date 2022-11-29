@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react"
-import { Text } from "@nextui-org/react";
+import { Grid, Card, Text } from "@nextui-org/react";
 import axios from 'axios'
 import './Blog.css'
 
@@ -11,7 +11,7 @@ export default function BlogFeed() {
         const loggedInUser = localStorage.getItem("user")
         if (loggedInUser) {
             const foundUser = JSON.parse(loggedInUser)
-            setUser(foundUser)
+            setUser(foundUser.sub)
         }
     }, []);
 
@@ -19,7 +19,7 @@ export default function BlogFeed() {
 
     useEffect(() => {
         if (typeof (user) !== "undefined") {
-            axios.post('/api/get_user_feed', {
+            axios.post('/api/get_blog_feed', {
                 user
             })
                 .then((response) => {
@@ -32,9 +32,50 @@ export default function BlogFeed() {
     return (
         <div>
             {user ?
-                <Text h2 className="centered">Your Feed</Text>
+                <>
+                    <Text h2 b className="centered">Your Feed</Text>
+                    <Text h3 className="centered">Search for blogs to add to your blog feed!</Text>
+                    <>
+                        {feed.map((post) =>
+                            <Grid.Container gap={2} justify="center">
+                                <Card css={{ mw: "400px" }}>
+                                    <Card.Header>
+                                        <img
+
+                                            src={post.image}
+                                            alt="Post Image"
+                                            width="70px"
+                                            height="70px"
+                                        />
+                                        <Grid.Container css={{ pl: "$6" }}>
+                                            <Grid xs={12}>
+                                                <Text h4 css={{ lineHeight: "$xs" }}>
+                                                    {post.title}
+                                                </Text>
+                                            </Grid>
+
+                                        </Grid.Container>
 
 
+                                    </Card.Header>
+                                    <Card.Divider />
+                                    <Card.Body>
+                                        <Text b>
+                                            {post.subtitle}
+                                        </Text>
+                                    </Card.Body>
+                                    <Card.Divider />
+
+                                    <Card.Footer>
+
+                                    </Card.Footer>
+
+                                </Card>
+                            </Grid.Container>
+                        )
+                        }
+                    </>
+                </>
 
 
                 :

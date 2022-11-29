@@ -13,7 +13,7 @@ export default function AddPost(props) {
         text: "",
     })
 
-    console.log(post)
+    console.log("post blog_id " + props.blog_id)
 
     const saveChange = (e) => {
         setPost({ ...post, [e.target.name]: e.target.value })

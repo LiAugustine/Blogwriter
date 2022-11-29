@@ -22,7 +22,6 @@ export default function ManageBlog(user) {
                 alert("Changes saved!")
             )
     }
-
     useEffect(() => {
         if (typeof (user) !== "undefined") {
             axios.post('/api/get_user_blog', {
@@ -41,7 +40,6 @@ export default function ManageBlog(user) {
 
     const closeHandler = () => {
         setVisible(false);
-        console.log("closed");
     };
 
     return (

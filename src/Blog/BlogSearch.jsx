@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import axios from 'axios'
-import { createMemoryRouter, Link } from "react-router-dom"
+import { Link } from "react-router-dom"
 import { Card, Button, Grid, Text, Row } from "@nextui-org/react";
 import './Blog.css'
 
@@ -24,11 +24,11 @@ export default function BlogSearch() {
             });
     }, []);
 
-    console.log(user)
 
-    const onClickFollow = (user_id, blog_id) => {
+
+    const onClickFollow = (user_id, blog_author_id) => {
         axios.post('/api/follow_blog', {
-            user_id, blog_id
+            user_id, blog_author_id
         })
             .then(response => {
                 alert(response.data)
@@ -77,7 +77,7 @@ export default function BlogSearch() {
                             <Button
                                 className="centered"
                                 color="warning"
-                                onClick={() => onClickFollow(user.sub, blog.id)}
+                                onClick={() => onClickFollow(user.sub, blog.author_id)}
                             >
                                 +Follow Blogger
                             </Button>
