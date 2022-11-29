@@ -38,7 +38,10 @@ export default function BlogFeed() {
                     <>
                         {feed.map((post) =>
                             <Grid.Container gap={2} justify="center">
-                                <Card css={{ mw: "400px" }}>
+                                <Card css={{ mw: "400px" }}
+                                    isPressable
+                                    isHoverable
+                                >
                                     <Card.Header>
                                         <img
 
@@ -53,7 +56,9 @@ export default function BlogFeed() {
                                                     {post.title}
                                                 </Text>
                                             </Grid>
-
+                                            <Grid xs={12}>
+                                                <Text css={{ color: "$accents8" }}>{post.blog_name}</Text>
+                                            </Grid>
                                         </Grid.Container>
 
 
@@ -65,10 +70,6 @@ export default function BlogFeed() {
                                         </Text>
                                     </Card.Body>
                                     <Card.Divider />
-
-                                    <Card.Footer>
-
-                                    </Card.Footer>
 
                                 </Card>
                             </Grid.Container>

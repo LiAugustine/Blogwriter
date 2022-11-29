@@ -179,12 +179,16 @@ def get_blog_feed():
 
     blog_feed = []
 
+    blog_name = Blogs.query.filter_by()
     for author_id in followed_blogs:
         followed_articles = Articles.query.filter_by(author_id=author_id).all()
         for article in followed_articles:
+            blog_name_query = Blogs.query.filter_by(author_id=article.author_id).one()
+            blog_name = blog_name_query.blog_name  # get name of blog
             blog_feed.append(
                 {
                     "id": article.id,
+                    "blog_name": blog_name,
                     "author_id": article.author_id,
                     "title": article.title,
                     "subtitle": article.subtitle,
