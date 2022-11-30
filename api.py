@@ -19,6 +19,11 @@ def home():
     return render_template("index.html")
 
 
+@api.route("/<path:path>")
+def view_post_on_refresh(path):
+    return render_template("index.html")
+
+
 @api.route("/api/get_user_blog", methods=["POST"])
 def blog():
     data = request.json["user"]["user"]
@@ -198,3 +203,25 @@ def get_blog_feed():
                 }
             )
     return jsonify(blog_feed)
+
+
+@api.route("/api/get_post_from_id", methods=["POST"])
+def get_post_dynamically():
+    data = request.json
+    post_id = data["id"]
+    post = Articles.query.get(post_id)
+    blog_query = Blogs.query.filter_by(author_id=post.author_id).one()
+    author_name = blog_query.author_name
+    blog_image = blog_query.image
+    return jsonify(
+        {
+            "id": post.id,
+            "author_name": author_name,
+            "blog_image": blog_image,
+            "title": post.title,
+            "subtitle": post.subtitle,
+            "image": post.image,
+            "created_at": post.created_at,
+            "text": post.text,
+        }
+    )

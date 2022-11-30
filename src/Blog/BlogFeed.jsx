@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react"
 import { Grid, Card, Text } from "@nextui-org/react";
+import { Link } from "react-router-dom"
 import axios from 'axios'
 import './Blog.css'
 
@@ -41,6 +42,8 @@ export default function BlogFeed() {
                                 <Card css={{ mw: "400px" }}
                                     isPressable
                                     isHoverable
+                                    as={Link}
+                                    to={"/ViewPost/" + post.id}
                                 >
                                     <Card.Header>
                                         <img
@@ -82,6 +85,6 @@ export default function BlogFeed() {
                 :
                 <Text h2 className="centered">Login Required</Text>
             }
-        </div>
+        </div >
     )
 }

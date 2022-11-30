@@ -4,6 +4,7 @@ import HomePage from "./Blog/HomePage"
 import BlogFeed from "./Blog/BlogFeed"
 import BlogSearch from "./Blog/BlogSearch"
 import PostSearch from "./Blog/PostSearch"
+import ViewPost from "./Blog/ViewPost"
 
 export default function App() {
 
@@ -15,6 +16,7 @@ export default function App() {
         <Route path="/BlogFeed" element={<BlogFeed />} />
         <Route path="/BlogSearch" element={<BlogSearch />} />
         <Route path="/PostSearch" element={<PostSearch />} />
+        <Route path="/ViewPost/:id" element={<ViewPost />} />
       </Routes>
     </div>
   )
