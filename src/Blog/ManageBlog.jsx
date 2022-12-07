@@ -3,6 +3,7 @@ import axios from 'axios'
 import { Container, Modal, Button, Text, Input, Row, Collapse } from "@nextui-org/react";
 import AddPost from "./AddPost"
 import Posts from "./Posts"
+import { SlSettings } from "react-icons/sl";
 
 export default function ManageBlog(user) {
 
@@ -49,7 +50,7 @@ export default function ManageBlog(user) {
                     Manage Your Blog: {blog.blog_name}
                 </Text>
 
-                <Button auto onClick={handler}>Customize Blog</Button>
+                <Button auto ghost bordered color="primary" onClick={handler}><SlSettings /></Button>
 
                 <Modal
                     closeButton

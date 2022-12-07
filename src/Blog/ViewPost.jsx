@@ -3,7 +3,9 @@ import axios from 'axios'
 import { useParams } from "react-router-dom"
 import { Card, Row, Text, Loading, Avatar } from "@nextui-org/react";
 import { Editor } from '@tinymce/tinymce-react';
+import Disqus from "disqus-react"
 import "./Blog.css"
+import "./RmvTxtToolbar.css"
 
 export default function ViewPost() {
     const { id } = useParams()
@@ -23,53 +25,59 @@ export default function ViewPost() {
 
     const editorRef = useRef(null);
 
+    const disqusShortname = "blogwriter"
+
+
     return (
         <div>
             {post ?
-
-                <Card>
-                    <Card.Body>
-                        <Row align="center" justify="center">
-                            <Text h2 b>
-                                {post.title}
-                            </Text>
-                        </Row>
-
-                        <Row align="center" justify="center">
-                            <Text color="#889096" h4>
-                                {post.subtitle}
-                            </Text>
-                        </Row>
-                        <Row>
-                            <Avatar squared src={post.blog_image} />
-                            <Text>{post.author_name}</Text>
-                            <Row justify="flex-end">
-                                <Text>{post.created_at}</Text>
+                <>
+                    <Card>
+                        <Card.Body>
+                            <Row align="center" justify="center">
+                                <Text h2 b>
+                                    {post.title}
+                                </Text>
                             </Row>
-                        </Row>
-                    </Card.Body>
+
+                            <Row align="center" justify="center">
+                                <Text color="#889096" h4>
+                                    {post.subtitle}
+                                </Text>
+                            </Row>
+                            <Row>
+                                <Avatar squared src={post.blog_image} />
+                                <Text>{post.author_name}</Text>
+                                <Row justify="flex-end">
+                                    <Text>{post.created_at}</Text>
+                                </Row>
+                            </Row>
+                        </Card.Body>
+
+                    </Card>
+
                     <Editor
                         disabled={true}
+                        menubar={false}
+                        statusbar={false}
+                        toolbar={false}
+                        branding={false}
                         apiKey={import.meta.env.VITE_TINY_MCE_EDITOR}
                         onInit={(evt, editor) => editorRef.current = editor}
                         initialValue={post.text}
-                        init={{
-                            height: 500,
-                            menubar: false,
-                            plugins: [
-                                'advlist autolink lists link image charmap print preview anchor',
-                                'searchreplace visualblocks code fullscreen',
-                                'insertdatetime media table paste code help wordcount'
-                            ],
-                            toolbar: 'undo redo | formatselect | ' +
-                                'bold italic backcolor | alignleft aligncenter ' +
-                                'alignright alignjustify | bullist numlist outdent indent | ' +
-                                'removeformat | help',
-                            content_style: 'body { font-family:Helvetica,Arial,sans-serif; font-size:14px }'
-                        }}
                     />
-                </Card>
+                    <Disqus.DiscussionEmbed
+                        shortname={disqusShortname}
+                        config={
+                            {
+                                url: "http://localhost:5000/ViewArticle/" + post.id,
+                                identifier: post.id,
+                                title: post.title,
+                            }
 
+                        }
+                    />
+                </>
 
                 : <Loading />
 
