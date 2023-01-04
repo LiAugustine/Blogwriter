@@ -9,6 +9,4 @@ COPY . .
 
 EXPOSE 8080
 
-ENV FLASK_APP=application.py
-
-CMD [ "python3", "-m" , "flask", "run", "--host=0.0.0.0"]
+CMD python3 application.py
