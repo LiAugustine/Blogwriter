@@ -11,5 +11,6 @@ Created by Augustine Li.
 * PostgreSQL
 * React
 * Docker
+* Fly.io
 * AWS Elastic Beanstalk
 * AWS RDS, which hosts the PostgreSQL database
