@@ -46,7 +46,7 @@ export default function ViewPost() {
                                 </Text>
                             </Row>
                             <Row>
-                                <Avatar squared src={post.blog_image} />
+                                <Avatar squared size="lg" src={post.blog_image} />
                                 <Text>{post.author_name}</Text>
                                 <Row justify="flex-end">
                                     <Text>{post.created_at}</Text>
@@ -66,6 +66,9 @@ export default function ViewPost() {
                         onInit={(evt, editor) => editorRef.current = editor}
                         initialValue={post.text}
                     />
+
+                    <br></br>
+
                     <Disqus.DiscussionEmbed
                         shortname={disqusShortname}
                         config={
