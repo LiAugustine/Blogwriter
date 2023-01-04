@@ -4,7 +4,7 @@ database, that allows users to create and customize their blog, create blog post
 and follow other bloggers.
 Created by Augustine Li.
 <br/>
-**Deployed on http://blogwriter.eba-yvhmywcj.us-east-1.elasticbeanstalk.com/**
+**Deployed on https://blogwriter.fly.dev/**
 
 ## Technologies Used
 * Flask
@@ -12,5 +12,3 @@ Created by Augustine Li.
 * React
 * Docker
 * Fly.io
-* AWS Elastic Beanstalk
-* AWS RDS, which hosts the PostgreSQL database
