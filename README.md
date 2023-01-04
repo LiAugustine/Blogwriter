@@ -4,6 +4,9 @@ database, that allows users to create and customize their blog, create blog post
 and follow other bloggers.
 Created by Augustine Li.
 <br/>
+
+**Application was previously deployed on AWS Elastic Beanstalk and AWS RDS. Migrated to Fly.io for cost reasons.**
+
 **Deployed on https://blogwriter.fly.dev/**
 
 ## Technologies Used
@@ -12,3 +15,4 @@ Created by Augustine Li.
 * React
 * Docker
 * Fly.io
+
