@@ -1,5 +1,5 @@
 from flask import Flask
-from os import getenv
+from os import getenv, environ
 from dotenv import find_dotenv, load_dotenv
 from api import api
 from models import db
@@ -28,4 +28,5 @@ with application.app_context():
 application.register_blueprint(api)
 
 if __name__ == "__main__":
-    application.run()
+    port = int(environ.get("PORT", 8080))
+    application.run(host="0.0.0.0", port=port)
