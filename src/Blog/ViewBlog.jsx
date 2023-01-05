@@ -41,28 +41,22 @@ export default function ViewBlog() {
         <div>
             {blog ?
                 <>
-                    <Card>
-                        <Card.Body>
 
-                            <Row align="center" justify="center">
-                                <Avatar squared size="xl" src={blog.image} />
-                            </Row>
+                    <Row align="center" justify="center">
+                        <Avatar squared size="xl" src={blog.image} />
+                    </Row>
 
-                            <Row align="center" justify="center">
-                                <Text h2 b>
-                                    {blog.name}
-                                </Text>
-                            </Row>
+                    <Row align="center" justify="center">
+                        <Text h2 b>
+                            {blog.name}
+                        </Text>
+                    </Row>
 
-                            <Row align="center" justify="center">
-                                <Text h4>
-                                    {blog.description}
-                                </Text>
-                            </Row>
-
-                        </Card.Body>
-
-                    </Card>
+                    <Row align="center" justify="center">
+                        <Text h4>
+                            {blog.description}
+                        </Text>
+                    </Row>
                 </>
                 : <Loading />
             }

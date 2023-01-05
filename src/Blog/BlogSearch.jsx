@@ -49,10 +49,11 @@ export default function BlogSearch() {
                 <Grid.Container gap={2} justify="center">
                     <Card
                         css={{ mw: "400px" }}
-                        as={Link}
-                        to={"/ViewBlog/" + blog.id}
+
                     >
-                        <Card.Header>
+                        <Card.Header
+                            as={Link}
+                            to={"/ViewBlog/" + blog.id}>
                             <img
                                 src={blog.image}
                                 alt="Blog Image"
@@ -69,8 +70,10 @@ export default function BlogSearch() {
                             </Grid.Container>
                         </Card.Header>
 
-                        <Card.Body>
-                            <Text className="centered">
+                        <Card.Body
+                            as={Link}
+                            to={"/ViewBlog/" + blog.id}>
+                            <Text>
                                 {blog.description}
                             </Text>
                         </Card.Body>
