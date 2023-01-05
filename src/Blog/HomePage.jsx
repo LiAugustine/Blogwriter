@@ -16,8 +16,6 @@ export default function HomePage() {
     return (
         <div>
 
-            <br></br>
-
             {user ? <ManageBlog user={user} /> : <LandingPage />}
 
         </div >

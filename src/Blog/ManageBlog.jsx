@@ -75,11 +75,11 @@ export default function ManageBlog(user) {
 
     return (
         <Container>
-            <Row justify="center" align="center">
-                <Text b h2>
-                    Manage Your Blog: {blog.blog_name}
-                </Text>
-            </Row>
+
+            <Text className="centered" b h2>
+                Manage Your Blog: {blog.blog_name}
+            </Text>
+
             <Row justify="center" align="center">
 
                 <Button auto ghost bordered color="primary" onClick={handler}>
