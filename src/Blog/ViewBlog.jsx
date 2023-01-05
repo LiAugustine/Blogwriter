@@ -39,6 +39,7 @@ export default function ViewBlog() {
 
     return (
         <div>
+            <br></br>
             {blog ?
                 <>
 

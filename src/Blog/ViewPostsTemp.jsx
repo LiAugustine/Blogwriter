@@ -47,9 +47,7 @@ export default function ViewPostsTemp(props) {
                             </Text>
                         </Card.Body>
                         <Card.Divider />
-                        <Card.Footer>
 
-                        </Card.Footer>
                     </Card>
                 </Grid.Container>
             )

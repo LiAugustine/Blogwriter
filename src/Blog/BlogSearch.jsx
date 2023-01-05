@@ -37,13 +37,8 @@ export default function BlogSearch() {
 
     return (
         <div>
-            <Row align="center" justify="center">
-                <Button.Group className="centered" color="primary">
-                    <Button className="centered">Blogs</Button>
-                    <Button className="centered" flat as={Link} to="/PostSearch">Blog Posts</Button>
-                </Button.Group>
-            </Row>
 
+            <Text h2 b className="centered">Blogs</Text>
 
             {blogs.map((blog) =>
                 <Grid.Container gap={2} justify="center">

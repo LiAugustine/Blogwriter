@@ -24,12 +24,12 @@ export default function App() {
         <Navbar.Link as={Link} to="/BlogFeed">
           <FaNewspaper />
           <Spacer x={0.2} />
-          BlogFeed</Navbar.Link>
+          Blog Feed</Navbar.Link>
 
         <Navbar.Link as={Link} to="/BlogSearch">
           <FaSearch />
           <Spacer x={0.2} />
-          BlogSearch
+          Find Blogs
         </Navbar.Link>
 
 

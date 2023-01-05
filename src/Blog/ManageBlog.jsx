@@ -1,9 +1,10 @@
 import { useState, useEffect } from "react";
 import axios from 'axios'
-import { Container, Modal, Button, Text, Input, Row, Collapse } from "@nextui-org/react";
+import { Container, Modal, Button, Text, Input, Row, Spacer } from "@nextui-org/react";
 import AddPost from "./AddPost"
 import Posts from "./Posts"
 import { SlSettings } from "react-icons/sl";
+import './Blog.css'
 
 export default function ManageBlog(user) {
 
@@ -75,76 +76,83 @@ export default function ManageBlog(user) {
     return (
         <Container>
             <Row justify="center" align="center">
-                <Text b h3>
+                <Text b h2>
                     Manage Your Blog: {blog.blog_name}
                 </Text>
-
-                <Button auto ghost bordered color="primary" onClick={handler}><SlSettings /></Button>
-
-                <Modal
-                    closeButton
-                    width="800px"
-                    aria-labelledby="modal-title"
-                    open={visible}
-                    onClose={closeHandler}
-                >
-                    <Modal.Header>
-                        <Text id="modal-title" size={25}>
-                            Manage {" "}
-                            <Text b size={25}>
-                                {blog.blog_name}
-                            </Text>
-                        </Text>
-                    </Modal.Header>
-                    <Modal.Body>
-                        <Input
-                            name="blog_name"
-                            bordered
-                            fullWidth
-                            color="primary"
-                            size="lg"
-                            label="Blog Name"
-                            initialValue={blog.blog_name}
-                            onChange={saveChange}
-                        />
-                        <Input
-                            name="image"
-                            bordered
-                            fullWidth
-                            color="primary"
-                            size="lg"
-                            label="Image"
-                            initialValue={blog.image}
-                            onChange={saveChange}
-                        />
-                        <Input
-                            name="description"
-                            bordered
-                            fullWidth
-                            color="primary"
-                            size="lg"
-                            label="Description"
-                            initialValue={blog.description}
-                            onChange={saveChange}
-                        />
-                    </Modal.Body>
-
-                    <Modal.Footer>
-                        <Button auto color="success"
-                            onClick={onClickSave}
-                        >
-                            Save Changes!
-                        </Button>
-                        {" "}
-                        <Button auto flat color="error"
-                            onClick={closeHandler}
-                        >
-                            Cancel
-                        </Button>
-                    </Modal.Footer>
-                </Modal>
-
             </Row>
+            <Row justify="center" align="center">
+
+                <Button auto ghost bordered color="primary" onClick={handler}>
+                    <SlSettings />
+                    <Spacer x={0.2} />
+                    Blog Settings</Button>
+            </Row>
+
+            <br></br>
+            <Modal
+                closeButton
+                width="800px"
+                aria-labelledby="modal-title"
+                open={visible}
+                onClose={closeHandler}
+            >
+                <Modal.Header>
+                    <Text id="modal-title" size={25}>
+                        Manage {" "}
+                        <Text b size={25}>
+                            {blog.blog_name}
+                        </Text>
+                    </Text>
+                </Modal.Header>
+                <Modal.Body>
+                    <Input
+                        name="blog_name"
+                        bordered
+                        fullWidth
+                        color="primary"
+                        size="lg"
+                        label="Blog Name"
+                        initialValue={blog.blog_name}
+                        onChange={saveChange}
+                    />
+                    <Input
+                        name="image"
+                        bordered
+                        fullWidth
+                        color="primary"
+                        size="lg"
+                        label="Image"
+                        initialValue={blog.image}
+                        onChange={saveChange}
+                    />
+                    <Input
+                        name="description"
+                        bordered
+                        fullWidth
+                        color="primary"
+                        size="lg"
+                        label="Description"
+                        initialValue={blog.description}
+                        onChange={saveChange}
+                    />
+                </Modal.Body>
+
+                <Modal.Footer>
+                    <Button auto color="success"
+                        onClick={onClickSave}
+                    >
+                        Save Changes!
+                    </Button>
+                    {" "}
+                    <Button auto flat color="error"
+                        onClick={closeHandler}
+                    >
+                        Cancel
+                    </Button>
+                </Modal.Footer>
+            </Modal>
+
+
 
             <AddPost user={user} />
 
