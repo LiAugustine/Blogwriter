@@ -27,16 +27,6 @@ class Articles(db.Model):
     created_at = db.Column(DateTime(timezone=True), default=func.now())
     # updated_at = db.Column(DateTime(timezone=True), onupdate=func.now())
     text = db.Column(db.Text, unique=False, nullable=False)
-    article_likes = db.relationship(
-        "ArticleLikes", backref=db.backref("Blogs", order_by="ArticleLikes.liker_id")
-    )
-
-
-class ArticleLikes(db.Model):
-    __tablename__ = "ArticleLikes"
-    id = db.Column(db.Integer, primary_key=True)
-    liker_id = db.Column(db.Text, unique=True, nullable=False)
-    article_id = db.Column(db.Integer, ForeignKey("Articles.id"))
 
 
 class FollowedBlogs(db.Model):

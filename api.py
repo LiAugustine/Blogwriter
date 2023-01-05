@@ -4,7 +4,7 @@ api.py contains the RESTful API methods.
 
 from flask import render_template, Blueprint, jsonify, request
 
-from models import db, Blogs, Articles, ArticleLikes, FollowedBlogs
+from models import db, Blogs, Articles, FollowedBlogs
 
 from datetime import datetime
 
@@ -76,8 +76,10 @@ def save_blog_changes():
 
 @api.route("/api/get_posts", methods=["POST"])
 def get_posts():
-    author_id = request.json["user"]
+    data = request.json["user"]["user"]
+    author_id = data.get("sub")
     blog_posts = Articles.query.filter_by(author_id=author_id).all()
+
     return jsonify(
         [
             {
@@ -224,4 +226,48 @@ def get_post_dynamically():
             "created_at": post.created_at,
             "text": post.text,
         }
+    )
+
+
+@api.route("/api/get_blog_from_id", methods=["POST"])
+def get_blog_dynamically():
+    data = request.json
+    blog_id = data["id"]
+
+    blogger = Blogs.query.get(blog_id)
+    blog_author_id = blogger.author_id
+    blog_name = blogger.blog_name
+    blog_description = blogger.description
+    blog_image = blogger.image
+
+    return jsonify(
+        {
+            "id": blog_id,
+            "author_id": blog_author_id,
+            "name": blog_name,
+            "description": blog_description,
+            "image": blog_image,
+        }
+    )
+
+
+@api.route("/api/get_posts_for_blog", methods=["POST"])
+def get_posts_for_blog():
+    data = request.json
+    author_id = data.get("author_id")
+    blog_posts = Articles.query.filter_by(author_id=author_id).all()
+
+    return jsonify(
+        [
+            {
+                "id": post.id,
+                "author_id": post.author_id,
+                "title": post.title,
+                "subtitle": post.subtitle,
+                "image": post.image,
+                "created_at": post.created_at,
+                "text": post.text,
+            }
+            for post in blog_posts
+        ]
     )

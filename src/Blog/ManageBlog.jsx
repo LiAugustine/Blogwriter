@@ -7,11 +7,24 @@ import { SlSettings } from "react-icons/sl";
 
 export default function ManageBlog(user) {
 
+
     const [blog, setBlog] = useState([])
 
     const saveChange = (e) => {
         setBlog({ ...blog, [e.target.name]: e.target.value })
     };
+
+
+    // const [user, setUser] = useState()
+
+    // useEffect(() => {
+    //     if (typeof (props) !== "undefined") {
+    //         setUser(props.user.sub)
+    //     }
+    // }, [props])
+
+    // console.log("This is the user: " + user)
+
 
     const onClickSave = () => {
         axios.post('/api/save_blog_changes', {
@@ -23,17 +36,33 @@ export default function ManageBlog(user) {
                 alert("Changes saved!")
             )
     }
+
+
+    const [posts, setPosts] = useState([])
+
+
     useEffect(() => {
         if (typeof (user) !== "undefined") {
-            axios.post('/api/get_user_blog', {
-                user
-            })
+            axios.post('/api/get_posts',
+                { user }
+            )
+                .then((response) => {
+                    setPosts(response.data)
+                }
+                )
+        }
+
+        if (typeof (user) !== "undefined") {
+            axios.post('/api/get_user_blog',
+                { user }
+            )
                 .then((response) => {
                     setBlog(response.data)
                 }
                 )
         }
     }, [user]);
+
 
 
     const [visible, setVisible] = useState(false);
@@ -120,7 +149,7 @@ export default function ManageBlog(user) {
             <AddPost user={user} />
 
             <br></br>
-            <Posts user={user} />
+            <Posts posts={posts} />
         </Container >
     )
 }

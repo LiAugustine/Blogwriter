@@ -47,7 +47,11 @@ export default function BlogSearch() {
 
             {blogs.map((blog) =>
                 <Grid.Container gap={2} justify="center">
-                    <Card css={{ mw: "400px" }}>
+                    <Card
+                        css={{ mw: "400px" }}
+                        as={Link}
+                        to={"/ViewBlog/" + blog.id}
+                    >
                         <Card.Header>
                             <img
                                 src={blog.image}

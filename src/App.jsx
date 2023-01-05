@@ -5,7 +5,7 @@ import BlogFeed from "./Blog/BlogFeed"
 import BlogSearch from "./Blog/BlogSearch"
 import PostSearch from "./Blog/PostSearch"
 import ViewPost from "./Blog/ViewPost"
-
+import ViewBlog from "./Blog/ViewBlog"
 export default function App() {
 
   return (
@@ -17,6 +17,7 @@ export default function App() {
         <Route path="/BlogSearch" element={<BlogSearch />} />
         <Route path="/PostSearch" element={<PostSearch />} />
         <Route path="/ViewPost/:id" element={<ViewPost />} />
+        <Route path="/ViewBlog/:id" element={<ViewBlog />} />
       </Routes>
     </div>
   )

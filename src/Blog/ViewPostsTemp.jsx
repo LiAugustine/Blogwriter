@@ -1,12 +1,9 @@
 import { useState, useEffect } from "react";
-import axios from 'axios'
 import { Grid, Card, Row, Text } from "@nextui-org/react";
-import EditPost from "./EditPost"
-import DeletePost from "./DeletePost"
+import { Link } from "react-router-dom"
 
-export default function Posts(props) {
+export default function ViewPostsTemp(props) {
 
-    // const [user, setUser] = useState()
 
     const [posts, setPosts] = useState([])
 
@@ -15,24 +12,15 @@ export default function Posts(props) {
     }, [props.posts])
 
 
-    // useEffect(() => {
-    //     if (typeof (user) !== "undefined") {
-    //         axios.post('/api/get_posts', {
-    //             user
-    //         })
-    //             .then((response) => {
-    //                 setPosts(response.data)
-    //             }
-    //             )
-    //     }
-    // }, [user]);
-    // console.log(posts)
-
     return (
         <div>
             {posts.map((post) =>
                 <Grid.Container gap={2} justify="center">
-                    <Card css={{ mw: "400px" }}>
+                    <Card
+                        css={{ mw: "400px" }}
+                        as={Link}
+                        to={"/ViewPost/" + post.id}
+                    >
                         <Card.Header>
                             <img
 
@@ -60,23 +48,7 @@ export default function Posts(props) {
                         </Card.Body>
                         <Card.Divider />
                         <Card.Footer>
-                            <Grid.Container gap={2} align="center" justify="center">
-                                <Grid>
-                                    <EditPost
-                                        id={post.id}
-                                        title={post.title}
-                                        subtitle={post.subtitle}
-                                        image={post.image}
-                                        text={post.text} />
-                                </Grid>
 
-                                <Grid>
-                                    <DeletePost
-                                        id={post.id}
-                                        title={post.title}
-                                    />
-                                </Grid>
-                            </Grid.Container>
                         </Card.Footer>
                     </Card>
                 </Grid.Container>

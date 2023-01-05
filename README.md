@@ -7,6 +7,8 @@ Created by Augustine Li.
 
 **Application was previously deployed on AWS Elastic Beanstalk and AWS RDS. Migrated to Fly.io for cost reasons.**
 
+<br/>
+
 **Deployed on https://blogwriter.fly.dev/**
 
 ## Technologies Used

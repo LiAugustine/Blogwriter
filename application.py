@@ -28,6 +28,6 @@ with app.app_context():
 app.register_blueprint(api)
 
 if __name__ == "__main__":
-    # port = int(environ.get("PORT", 8080))  # local
-    port = int(environ.get("PORT", 8080))  # deployment
+    port = int(environ.get("PORT", 5000))  # local
+    # port = int(environ.get("PORT", 8080))  # deployment
     app.run(host="0.0.0.0", port=port)
